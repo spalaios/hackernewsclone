@@ -1,0 +1,38 @@
+.post-index-number {
+  min-width: 22px;
+}
+
+.post-article, .post-article:hover, .post-article:focus{
+  text-decoration: none;
+  color: #0f1e2c;
+  /* font-size: 0.833rem; */
+}
+
+.post-article:visited {
+  color: #828282;
+}
+
+.post-author {
+  font-size: 0.667rem;
+}
+
+.post-index-number, .post-article {
+  font-size: 0.833rem;
+}
+
+.post-author, .post-index-number {
+  color: #828282;
+}
+
+.post-upvote {
+  max-width: 11px;
+}
+
+.post-lower-block-text {
+  font-size: 0.583rem;
+  margin-left: 4.5em;
+}
+
+.post-lower-author, .post-lower-block-text {
+  color: #9b9ba4;
+}

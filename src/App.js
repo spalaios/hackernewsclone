@@ -1,17 +1,16 @@
 import React, { Component, Fragment } from 'react';
-import LandingPage from './components/LandingPage';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Home from './components/container/Home';
+import '../styles/styles.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+class App extends Component {  
   render() {
     return (
-      <Fragment>
-        <LandingPage />
-      </Fragment>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={Home} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

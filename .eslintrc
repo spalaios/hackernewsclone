@@ -7,8 +7,11 @@
     "eol-last": "off",
     "no-trailing-spaces": "off",
     "arrow-body-style": "warn",
-    "eqeqeq": "warn"
-
+    "eqeqeq": "warn",
+    "import/prefer-default-export": "warn",
+    "operator-assignment": "off",
+    "prefer-const": "off",
+    "global-require": "warn"
   },
   "extends": ["airbnb-base"],
   "env": {

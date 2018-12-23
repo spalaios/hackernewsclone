@@ -9,4 +9,6 @@ const NAME = Object.freeze({
   name: 'Suraj',
 });
 
-export { API, NAME };
+const BATCHSIZE = 30;
+
+export { API, NAME, BATCHSIZE };
