@@ -4,15 +4,17 @@
 
 .post-article, .post-article:hover, .post-article:focus{
   text-decoration: none;
+}
+
+.post-article, .post-article:hover, .post-article:focus {
   color: #0f1e2c;
-  /* font-size: 0.833rem; */
 }
 
 .post-article:visited {
   color: #828282;
 }
 
-.post-author {
+.post-author, .post-author:hover, .post-author:visited {
   font-size: 0.667rem;
 }
 
@@ -20,7 +22,7 @@
   font-size: 0.833rem;
 }
 
-.post-author, .post-index-number {
+.post-author, .post-index-number, .post-author:hover, .post-author:visited {
   color: #828282;
 }
 
@@ -33,6 +35,6 @@
   margin-left: 4.5em;
 }
 
-.post-lower-author, .post-lower-block-text {
+.post-lower-author, .post-lower-block-text, .post-lower-author:hover, .time-link, .time-link:hover, .comments-links, .comments-links:hover {
   color: #9b9ba4;
 }

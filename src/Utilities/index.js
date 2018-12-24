@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import _ from 'lodash';
+import { distanceInWords } from 'date-fns';
 import { BATCHSIZE, API } from '../../constants';
 
 function getBatchSizeIndex(batchSize, callNumber) {
@@ -29,7 +30,7 @@ function makeBatchCalls(callNumber, responseArray) {
     Promise.all(promise)
       .then((values) => {
         _.forEach(values, (value) => {
-          console.log(value);
+          // console.log(value);
           const { title, url } = value.data;
           titles.push({ index: startIndex + 1, ...value.data });
           startIndex = startIndex + 1;
@@ -44,5 +45,21 @@ function makeBatchCalls(callNumber, responseArray) {
   return dataPromise;
 }
 
+function getHumanizedTimeDifference(currentTimeInMilliseconds, articleTimeInMilliseconds) {
+  let timeInWords = distanceInWords(currentTimeInMilliseconds, articleTimeInMilliseconds);
+  if (timeInWords.includes('about')) {
+    timeInWords = timeInWords.substr(6);
+  }
+  return `${timeInWords} ago`;
+}
 
-export default makeBatchCalls;
+function getShortUrlLink(urlLink) {
+  let shortUrlLink = urlLink.split('//')[1].split('/')[0];
+  console.log(shortUrlLink);
+  if (shortUrlLink.includes('www')) {
+    return `(${shortUrlLink.substr(4)})`;
+  }
+  return `(${shortUrlLink})`;
+}
+
+export { makeBatchCalls, getHumanizedTimeDifference, getShortUrlLink };

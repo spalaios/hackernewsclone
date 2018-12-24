@@ -1,0 +1,28 @@
+.footer-links-block a, .footer-links-block a:hover {
+  color: #0f1e2c;
+  font-size: 0.667rem;
+  text-decoration: none;
+}
+
+.footer-links-block a:nth-child(1), .footer-links-block a:nth-child(2), .footer-links-block a:nth-child(4), .footer__search span {
+  color: #828282;
+}
+
+.footer-links-block {
+  background: #f6f6ef;
+}
+
+.footer__search input{
+  border-radius: 5px;
+  border: 1px solid darkgrey;
+  text-indent: 5px;
+}
+
+.footer__search input:focus {
+  border: 1px solid #fb693f;
+  outline: none;
+}
+
+.footer__search span {
+  font-size: 0.833rem;
+}

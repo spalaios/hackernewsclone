@@ -1,12 +1,14 @@
 import React, { Component, PureComponent } from 'react';
 import Axios from 'axios';
 import _ from 'lodash';
-import { API } from '../../../constants';
-import Post from '../presentation/Post/PostlistItem';
-import Loader from '../presentation/Loader';
-import makeBatchCalls from '../../Utilities';
-import NavigationBar from './Navigation/index';
-import PostList from '../presentation/Post/PostList';
+import { API } from '../../../../constants';
+import Post from '../../presentation/Post/PostlistItem';
+import Loader from '../../presentation/Loader';
+import { makeBatchCalls } from '../../../Utilities';
+import NavigationBar from '../Navigation/index';
+import PostList from '../../presentation/Post/PostList';
+import './home.css';
+import Footer from '../Footer/Footer';
 
 class Home extends Component {
   constructor(props) {
@@ -22,6 +24,8 @@ class Home extends Component {
 
   componentDidMount() {
     this.url = `${API.URL}${API.VERSION}${API.TOPSTORIES}`;
+    // console.log(this.url);
+    console.log('api calls made');
     Axios({
       method: 'GET',
       url: this.url,
@@ -29,6 +33,7 @@ class Home extends Component {
       .then((response) => {
         const { data } = response;
         this.originalResponse = data;
+        // console.log(data);
         this.renderItems(this.callNumber, this.originalResponse);
       })
       .catch((error) => {});
@@ -54,11 +59,16 @@ class Home extends Component {
     return (
       <Loader isLoading={this.state.isLoading}>
         <div className="container">
-          <NavigationBar />
+          <div className="mt-2">
+            <NavigationBar />
+          </div>
           <PostList>
             <Post data={this.state.data} />
-            <button type="button" onClick={this.handleMoreBtn}>More</button>
+            <button type="button" className="more-button mt-3 mb-2" onClick={this.handleMoreBtn}>More</button>
           </PostList>
+          <div className="post-list-bottom-orange-border">
+            <Footer />
+          </div>
         </div>
       </Loader>
     );

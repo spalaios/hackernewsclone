@@ -11,7 +11,8 @@
     "import/prefer-default-export": "warn",
     "operator-assignment": "off",
     "prefer-const": "off",
-    "global-require": "warn"
+    "global-require": "warn",
+    "prefer-template": "warn"
   },
   "extends": ["airbnb-base"],
   "env": {

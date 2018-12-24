@@ -8,3 +8,7 @@
 .hacker-news-logo {
   border: 1px solid #fff;
 }
+
+.navigation__tabs p {
+  font-size: 0.8333rem;
+}

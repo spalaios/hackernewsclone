@@ -3,7 +3,7 @@ import './postlist.css';
 
 const PostList = ({ children }) => {
   return (
-    <section className="postlist border">
+    <section className="postlist pt-2">
       {children}
     </section>
   );
