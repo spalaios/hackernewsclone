@@ -12,7 +12,8 @@
     "operator-assignment": "off",
     "prefer-const": "off",
     "global-require": "warn",
-    "prefer-template": "warn"
+    "prefer-template": "warn",
+    "no-undef": "warn"
   },
   "extends": ["airbnb-base"],
   "env": {

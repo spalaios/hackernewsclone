@@ -9,6 +9,7 @@ import NavigationBar from '../Navigation/index';
 import PostList from '../../presentation/Post/PostList';
 import './home.css';
 import Footer from '../Footer/Footer';
+import MoreButton from '../../presentation/Button/Button';
 
 class Home extends Component {
   constructor(props) {
@@ -64,7 +65,7 @@ class Home extends Component {
           </div>
           <PostList>
             <Post data={this.state.data} />
-            <button type="button" className="more-button mt-3 mb-2" onClick={this.handleMoreBtn}>More</button>
+            <MoreButton handleClick={this.handleMoreBtn} />
           </PostList>
           <div className="post-list-bottom-orange-border">
             <Footer />

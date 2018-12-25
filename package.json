@@ -7,17 +7,22 @@
   "scripts": {
     "start": "webpack-dev-server --open --port 5002 --compress --mode development",
     "dev": "webpack --mode development --progress",
-    "build": "webpack --mode production --progress"
+    "build": "webpack --mode production --progress",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "css-loader": "^1.0.1",
     "date-fns": "^1.30.1",
+    "jest-css-modules-transform": "^2.1.1",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-router-dom": "^4.3.1",
+    "regenerator-runtime": "^0.13.1",
     "style-loader": "^0.23.1"
   },
   "devDependencies": {
@@ -34,8 +39,31 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-react": "^7.11.1",
     "html-webpack-plugin": "^4.0.0-alpha",
+    "jest": "^23.6.0",
+    "react-test-renderer": "^16.7.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.7"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "src",
+      "node_modules"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest",
+      ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules-transform"
+    },
+    "moduleFileExtensions": [
+      "css",
+      "scss",
+      "js",
+      "json",
+      "jsx"
+    ],
+    "testRegex": "/__tests__/.*\\.js$",
+    "transformIgnorePatterns": [
+      "/node_modules/(?!test-component).+\\.js$"
+    ]
   }
 }

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the button component 1`] = `
+<button
+  className="more-button mt-3 mb-2 cursor"
+  onClick={[Function]}
+  type="button"
+>
+  More
+</button>
+`;
