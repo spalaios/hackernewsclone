@@ -13,7 +13,9 @@
     "prefer-const": "off",
     "global-require": "warn",
     "prefer-template": "warn",
-    "no-undef": "warn"
+    "no-undef": "warn",
+    "max-len": "warn",
+    "no-param-reassign": "warn"
   },
   "extends": ["airbnb-base"],
   "env": {

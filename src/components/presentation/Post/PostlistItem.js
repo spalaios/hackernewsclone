@@ -8,7 +8,7 @@ import { getHumanizedTimeDifference, getShortUrlLink } from '../../../Utilities'
 
 function renderPost(dataArray) {
   return _.map(dataArray, (value, key) => {
-    console.log(value);
+    // console.log(value);
     const { 
       title, url, index, by, score, time, descendants,
     } = value;

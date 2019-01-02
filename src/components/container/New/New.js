@@ -5,15 +5,15 @@ import WithStoriesApi from '../WithAPIStories';
 import MainView from '../../presentation/MainView';
 import MainViewContainer from '../../presentation/MainViewContainer';
 
-const HomePostList = WithStoriesApi(MainView, API.TOPSTORIES);
+const NewPostList = WithStoriesApi(MainView, API.NEW);
 
-
-const Home = ({ history }) => {
+const New = ({ history }) => {
+  console.log('inside New ');
   return (
     <MainViewContainer history={history}>
-      <HomePostList />
+      <NewPostList />
     </MainViewContainer>
   );
 };
 
-export default Home;
+export default New;

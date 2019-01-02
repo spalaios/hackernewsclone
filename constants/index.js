@@ -3,6 +3,7 @@ const API = Object.freeze({
   VERSION: '/v0',
   TOPSTORIES: '/topstories.json',
   ITEM: '/item',
+  NEW: '/newstories.json',
 });
 
 const NAME = Object.freeze({

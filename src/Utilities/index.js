@@ -29,9 +29,10 @@ function makeBatchCalls(callNumber, responseArray) {
   const dataPromise = new Promise((resolve, reject) => {
     Promise.all(promise)
       .then((values) => {
+        console.log(values);
         _.forEach(values, (value) => {
           // console.log(value);
-          const { title, url } = value.data;
+          // const { title, url } = value.data;
           titles.push({ index: startIndex + 1, ...value.data });
           startIndex = startIndex + 1;
         });
@@ -55,7 +56,7 @@ function getHumanizedTimeDifference(currentTimeInMilliseconds, articleTimeInMill
 
 function getShortUrlLink(urlLink) {
   let shortUrlLink = urlLink.split('//')[1].split('/')[0];
-  console.log(shortUrlLink);
+  // console.log(shortUrlLink);
   if (shortUrlLink.includes('www')) {
     return `(${shortUrlLink.substr(4)})`;
   }
