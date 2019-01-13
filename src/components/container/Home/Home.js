@@ -7,6 +7,7 @@ import MainViewContainer from '../../presentation/MainViewContainer';
 
 const HomePostList = WithStoriesApi(MainView, API.TOPSTORIES);
 
+// TODO: //make sure of unmounting implementation in all class declaration
 
 const Home = ({ history }) => {
   return (

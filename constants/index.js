@@ -12,4 +12,10 @@ const NAME = Object.freeze({
 
 const BATCHSIZE = 30;
 
-export { API, NAME, BATCHSIZE };
+const TreeNodeType = Object.freeze({
+  COMMENT: 'comment',
+});
+
+export {
+  API, NAME, BATCHSIZE, TreeNodeType,
+};

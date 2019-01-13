@@ -1,7 +1,9 @@
 import Axios from 'axios';
 import _ from 'lodash';
 import { distanceInWords } from 'date-fns';
-import { BATCHSIZE, API } from '../../constants';
+import { BATCHSIZE, API, TreeNodeType } from '../../constants';
+import TreeNode from './DataStructure/TreeNode';
+import CommentTree from './DataStructure/CommentTree';
 
 function getBatchSizeIndex(batchSize, callNumber) {
   const startIndex = batchSize * callNumber;
@@ -63,4 +65,65 @@ function getShortUrlLink(urlLink) {
   return `(${shortUrlLink})`;
 }
 
-export { makeBatchCalls, getHumanizedTimeDifference, getShortUrlLink };
+function getKidsRecursively(kids, promise, commentTree) {
+  if (_.isEmpty(kids)) {
+    return;
+  }
+  _.forEach(kids, (kidId) => {
+    promise.push(fetchItemJSON(kidId));
+  });
+  const CommentTreePromise = new Promise((resolve, reject) => {
+    Promise.all(promise)
+      .then((values) => {
+        _.forEach(values, (value) => {
+          const { data } = value;
+          const commentNode = new TreeNode(data, TreeNodeType.COMMENT);
+          commentTree.insertNode(root, commentNode);
+        });
+        promise = [];
+        console.log(commentTree);
+      }).catch((err) => {
+        console.log(err);
+      });
+  });
+}
+
+function generateCommentTree(commentTreeRootNode) {
+  console.log(commentTreeRootNode);
+  let promise = [];
+  const commentTree = new CommentTree(commentTreeRootNode);
+  const { root } = commentTree;
+  if (!_.isNull(root) || !_.isEmpty(root)) {
+    const { kids } = root;
+    getKidsRecursively(kids, promise);
+  }
+}
+
+function getComments(postId, storyType) {
+  const Post = fetchItemJSON(postId);
+  let commentTreeRootNode;
+  const CommentTreePromise = new Promise((resolve, reject) => {
+    Post.then((result) => {
+      console.log(result);
+      if (!_.isEmpty(result)) {
+        const { data } = result;
+        if (!_.isNull(data) || !_.isEmpty(data)) {
+          if (storyType === 'regular') {
+            commentTreeRootNode = new TreeNode(data);
+            generateCommentTree(commentTreeRootNode);          
+            resolve(commentTreeRootNode);
+          }
+        }
+      }
+    })
+      .catch((error) => {
+        console.log(error);
+        reject(error);
+      });
+  });
+  return CommentTreePromise;
+}
+
+export {
+  makeBatchCalls, getHumanizedTimeDifference, getShortUrlLink, getComments,
+};

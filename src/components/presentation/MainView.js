@@ -4,11 +4,13 @@ import MoreButton from './Button/Button';
 import PostList from './Post/PostList';
 import './MainView.css';
 
-const MainView = ({ postData, handleMoreButtonClick }) => (
-  <PostList>
-    <Post data={postData} />
-    <MoreButton handleClick={handleMoreButtonClick} />
-  </PostList>
-);
+const MainView = ({ postData, handleMoreButtonClick, history }) => {
+  return (
+    <PostList>
+      <Post data={postData} history={history} />
+      <MoreButton handleClick={handleMoreButtonClick} />
+    </PostList>
+  ); 
+};
 
 export default MainView;
