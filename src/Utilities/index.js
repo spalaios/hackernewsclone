@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import Axios from 'axios';
 import _ from 'lodash';
 import { distanceInWords } from 'date-fns';
@@ -65,27 +66,62 @@ function getShortUrlLink(urlLink) {
   return `(${shortUrlLink})`;
 }
 
-function getKidsRecursively(kids, promise, commentTree) {
-  if (_.isEmpty(kids)) {
+// function getKidsRecursively(root, kids, promise, commentTree) {
+//   // recursive strategy to be used here
+//   if (_.isEmpty(kids)) {
+//     return;
+//   }
+//   // take kids of root
+//   _.forEach(kids, (kidId) => {
+//     promise.push(fetchItemJSON(kidId));
+//   });
+//   const CommentTreePromise = new Promise((resolve, reject) => {
+//     Promise.all(promise)
+//       .then((values) => {
+//         _.forEach(values, (value) => {
+//           const { data } = value;
+//           const commentNode = new TreeNode(data, TreeNodeType.COMMENT);
+//           commentTree.insertNode(root, commentNode);
+//         });
+//         promise = [];
+//         console.log(commentTree);
+//       }).catch((err) => {
+//         console.log(err);
+//       });
+//   });
+// }
+
+function getKidsRecursively(root, commentTree) {
+  // if root is none return
+  if (_.isNull(root)) {
     return;
   }
-  _.forEach(kids, (kidId) => {
-    promise.push(fetchItemJSON(kidId));
-  });
-  const CommentTreePromise = new Promise((resolve, reject) => {
-    Promise.all(promise)
-      .then((values) => {
-        _.forEach(values, (value) => {
-          const { data } = value;
-          const commentNode = new TreeNode(data, TreeNodeType.COMMENT);
-          commentTree.insertNode(root, commentNode);
+  let promise = [];
+  let CommentTreePromise;
+  const { kids } = root;
+  if (!_.isEmpty(kids)) {
+    _.forEach(kids, (kidId) => {
+      promise.push(fetchItemJSON(kidId));
+    });
+    CommentTreePromise = new Promise((resolve, reject) => {
+      Promise.all(promise)
+        .then((values) => {
+          _.forEach(values, (value) => {
+            const { data } = value;
+            const commentNode = new TreeNode(data, TreeNodeType.COMMENT);
+            commentTree.insertNode(root, commentNode);
+            getKidsRecursively(commentNode, commentTree, promise);
+          });
+          // console.log(commentTree);
+          resolve(commentTree);
+        }).catch((err) => {
+          console.log(err);
+          reject(err);
         });
-        promise = [];
-        console.log(commentTree);
-      }).catch((err) => {
-        console.log(err);
-      });
-  });
+    });
+    return CommentTreePromise;
+  }
+  return null;
 }
 
 function generateCommentTree(commentTreeRootNode) {
@@ -94,9 +130,9 @@ function generateCommentTree(commentTreeRootNode) {
   const commentTree = new CommentTree(commentTreeRootNode);
   const { root } = commentTree;
   if (!_.isNull(root) || !_.isEmpty(root)) {
-    const { kids } = root;
-    getKidsRecursively(kids, promise);
+    return getKidsRecursively(root, commentTree, promise);
   }
+  return null;
 }
 
 function getComments(postId, storyType) {
@@ -110,8 +146,8 @@ function getComments(postId, storyType) {
         if (!_.isNull(data) || !_.isEmpty(data)) {
           if (storyType === 'regular') {
             commentTreeRootNode = new TreeNode(data);
-            generateCommentTree(commentTreeRootNode);          
-            resolve(commentTreeRootNode);
+            let commentTree = generateCommentTree(commentTreeRootNode);          
+            resolve(commentTree);
           }
         }
       }

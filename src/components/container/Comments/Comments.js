@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { getComments } from '../../../Utilities';
+import CommentList from './CommentsList';
 
 class Comments extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      page: 'comments',
+      commentTree: {},
     };
   }
 
@@ -19,6 +20,14 @@ class Comments extends Component {
       treePromise
         .then((tree) => {
           console.log(tree);
+          const { root } = tree;
+          console.log(root);
+          const { childrens } = root;
+          console.log(childrens);
+          this.setState(prevState => ({
+            ...prevState,
+            commentTree: tree,
+          }));
         }).catch((err) => {
           console.log(err);
         });
@@ -27,9 +36,12 @@ class Comments extends Component {
     }
   }
 
-  render() { 
+  render() {
+    if (_.isEmpty(this.state.commentTree)) {
+      return <p>Loading</p>;
+    } 
     return ( 
-      <p>Comments</p>
+      <CommentList commentTree={this.state.commentTree} />
     );
   }
 }

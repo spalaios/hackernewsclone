@@ -16,7 +16,8 @@
     "no-undef": "warn",
     "max-len": "warn",
     "no-param-reassign": "warn",
-    "dot-notation": "warn"
+    "dot-notation": "warn",
+    "consistent-return": "warn"
   },
   "extends": ["airbnb-base"],
   "env": {
